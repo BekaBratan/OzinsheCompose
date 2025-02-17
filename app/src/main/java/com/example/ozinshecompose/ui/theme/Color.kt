@@ -1,8 +1,6 @@
 package com.example.ozinshecompose.ui.theme
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import com.example.ozinshecompose.R
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
@@ -38,3 +36,29 @@ val White = Color(0xFFFFFFFF)
 val Yellow = Color(0xFF00BF71)
 val Green = Color(0xFFFBBC05)
 val Blue = Color(0xFF2370FF)
+
+sealed class ThemeColors(
+    val background: Color,
+    val surface: Color,
+    val primary: Color,
+    val secondary: Color,
+    val tertiary: Color,
+    val onBackground: Color
+) {
+    object Night: ThemeColors(
+        background = Gray900,
+        surface = Gray800,
+        primary = Primary500,
+        secondary = Gray400,
+        tertiary = Gray700,
+        onBackground = White
+    )
+    object Day: ThemeColors(
+        background = White,
+        surface = Gray300,
+        primary = Primary500,
+        secondary = Gray400,
+        tertiary = Gray100,
+        onBackground = Gray900
+    )
+}

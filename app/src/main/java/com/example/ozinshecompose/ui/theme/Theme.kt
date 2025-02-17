@@ -3,6 +3,7 @@ package com.example.ozinshecompose.ui.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -12,15 +13,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    background = ThemeColors.Night.background,
+    surface = ThemeColors.Night.surface,
+    primary = ThemeColors.Night.primary,
+    secondary = ThemeColors.Night.secondary,
+    tertiary = ThemeColors.Night.tertiary,
+    onBackground = ThemeColors.Night.onBackground
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    background = ThemeColors.Day.background,
+    surface = ThemeColors.Day.surface,
+    primary = ThemeColors.Day.primary,
+    secondary = ThemeColors.Day.secondary,
+    tertiary = ThemeColors.Day.tertiary,
+    onBackground = ThemeColors.Day.onBackground
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -40,7 +47,7 @@ fun OzinsheComposeTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
+    val colorScheme: ColorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
@@ -50,9 +57,14 @@ fun OzinsheComposeTheme(
         else -> LightColorScheme
     }
 
+    val colors = if (!darkTheme) {
+        LightColorScheme
+    } else {
+        DarkColorScheme
+    }
+
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
+        colorScheme = colors,
         content = content
     )
 }
