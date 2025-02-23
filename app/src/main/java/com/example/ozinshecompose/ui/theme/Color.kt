@@ -43,7 +43,8 @@ sealed class ThemeColors(
     val primary: Color,
     val secondary: Color,
     val tertiary: Color,
-    val onBackground: Color
+    val onBackground: Color,
+    val onTertiary: Color
 ) {
     object Night: ThemeColors(
         background = Gray900,
@@ -51,7 +52,8 @@ sealed class ThemeColors(
         primary = Primary500,
         secondary = Gray400,
         tertiary = Gray700,
-        onBackground = White
+        onBackground = White,
+        onTertiary = Gray800
     )
     object Day: ThemeColors(
         background = White,
@@ -59,6 +61,7 @@ sealed class ThemeColors(
         primary = Primary500,
         secondary = Gray400,
         tertiary = Gray100,
-        onBackground = Gray900
+        onBackground = Gray900,
+        onTertiary = Gray100
     )
 }
