@@ -1,6 +1,5 @@
 package com.example.ozinshecompose.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -45,7 +44,6 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun OzinsheComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -59,14 +57,8 @@ fun OzinsheComposeTheme(
         else -> LightColorScheme
     }
 
-    val colors = if (!darkTheme) {
-        LightColorScheme
-    } else {
-        DarkColorScheme
-    }
-
     MaterialTheme(
-        colorScheme = colors,
+        colorScheme = colorScheme,
         content = content
     )
 }
