@@ -3,6 +3,7 @@ package com.example.ozinshecompose.presentation
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,23 +33,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.ozinshecompose.R
+import com.example.ozinshecompose.SecondScreen
 import com.example.ozinshecompose.ui.theme.OzinsheComposeTheme
 import com.example.ozinshecompose.ui.theme.Primary500
 import com.example.ozinshecompose.ui.theme.White
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    name = "DefaultPreviewDark"
-)
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-    name = "DefaultPreviewLight"
-)
+
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     var listCom = listOf<@Composable () -> Unit>(
-        { MoviesList(card = { MainMovieCard() } )},
+        { MoviesList(card = { MainMovieCard(navController) } )},
         { MoviesList(card = { ContinueMovieCard() }, name = "Қарауды жалғастырыңыз", isExtend = false)},
         { MoviesList(card = { PosterMovieCard() }, name = "Қарауды жалғастырыңыз", isExtend = true)},
         { MoviesList(card = { PosterMovieCard() }, name = "Қарауды жалғастырыңыз", isExtend = true)},
@@ -96,15 +92,15 @@ fun Logo() {
     )
 }
 
-@Preview
 @Composable
-fun MainMovieCard() {
+fun MainMovieCard(navController: NavHostController) {
     val painter = painterResource(id = R.drawable.ic_launcher_background)
 
     Column(
         modifier = Modifier
             .width(316.dp)
             .background(Color.Transparent)
+            .clickable(onClick = {navController.navigate(SecondScreen(1, "Қызғалдақтар мекені"))})
     ) {
         Box(
             modifier = Modifier
